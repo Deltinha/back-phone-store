@@ -5,6 +5,6 @@
 
 #testing
 .env
-.env_test
+.env.test
 
 # misc
