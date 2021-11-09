@@ -1,7 +1,6 @@
 import pg from "pg";
 
 const { Pool } = pg;
-const envFile = process.env.NODE_ENV === "test" ? ".env.test" : ".env";
 
 console.log(`Using the database ${process.env.DB_DATABASE}.`);
 
