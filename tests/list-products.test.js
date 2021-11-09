@@ -14,7 +14,6 @@ describe("List products test suit", () => {
   });
   it("returns 200 for get on '/products'", async () => {
     const result = await supertest(app).get("/products");
-    console.log(result.body);
     expect(result.status).toEqual(200);
   });
 });
