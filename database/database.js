@@ -1,21 +1,16 @@
 import pg from "pg";
 
 const { Pool } = pg;
+const envFile = process.env.NODE_ENV === "test" ? ".env.test" : ".env";
 
-let database;
-
-if (process.env.NODE_ENV === "test") {
-  database = "phone_store_test";
-} else {
-  database = "phone_store";
-}
+console.log(`Using the database ${process.env.DB_DATABASE}.`);
 
 const connection = new Pool({
-  host: "localhost",
-  port: 5432,
-  user: "postgres",
-  password: "delta",
-  database,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE,
 });
 
 export default connection;
