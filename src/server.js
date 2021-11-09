@@ -1,6 +1,6 @@
 import app from './app';
 
-const port = 4002;
+const port = 4000;
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error(`Server exiting due to an unhandled promise rejection: ${promise} and reason ${reason}`);

@@ -1,3 +1,4 @@
+import './setup';
 import express from 'express';
 import cors from 'cors';
 
@@ -6,6 +7,8 @@ import * as productController from './controllers/product';
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.get('/product', productController.getAllProducts);
 
 app.get('/product/:id', productController.getProductInfoById);
 

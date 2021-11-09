@@ -2,13 +2,14 @@
 import connection from '../database/database';
 
 export async function getProductInfoById(id) {
-  const product = connection.query(`
+  const product = await connection.query(`
   SELECT * FROM products
-  WHERE id = $'
+  WHERE id = $1;
   `, [id]);
   return product.rows;
 }
 
-export async function product2() {
-  //
+export async function getAllProducts() {
+  const products = await connection.query('SELECT * FROM products;');
+  return products.rows;
 }
