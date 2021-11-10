@@ -14,7 +14,7 @@ export async function getProductInfoById(id) {
 
 export async function getAllProducts() {
   const products = await connection.query(`
-  SELECT products.*, product_image.url as "imageUrl" FROM products JOIN product_image ON product_image."product_id"=products."id";
+  SELECT products.*, product_image.url as "imageUrl" FROM products JOIN product_image ON product_image."product_id"=products."id" WHERE "perspective"='front';
   `);
   return products.rows;
 }
