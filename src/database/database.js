@@ -2,9 +2,6 @@ import pg from 'pg';
 
 const { Pool } = pg;
 
-console.log(`Using the database ${process.env.DB_DATABASE}.`);
-console.log(process.env.DATABASE_URL);
-
 let databaseConfig = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
