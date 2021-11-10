@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
-import connection from '../database/database';
+import connection from '../database/database.js';
 
 export async function getProductInfoById(id) {
-  const product = await connection.query(`
+  const product = await connection.query(
+    `
   SELECT * FROM products
   WHERE id = $1;
-  `, [id]);
+  `,
+    [id],
+  );
   return product.rows;
 }
 
