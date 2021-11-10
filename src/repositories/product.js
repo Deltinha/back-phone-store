@@ -13,6 +13,8 @@ export async function getProductInfoById(id) {
 }
 
 export async function getAllProducts() {
-  const products = await connection.query('SELECT * FROM products;');
+  const products = await connection.query(`
+  SELECT products.*, product_image.url as "imageUrl" FROM products JOIN product_image ON product_image."product_id"=products."id";
+  `);
   return products.rows;
 }
