@@ -1,4 +1,4 @@
-import app from './app';
+import app from './app.js';
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error(
@@ -11,6 +11,8 @@ process.on('uncaughtException', (error) => {
   console.error('Server exiting due to uncaught exception', error);
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is listening on port ${process.env.PORT}`);
+const port = process.env.NODE_ENV === 'dev' ? 4000 : process.env.PORT;
+
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
 });

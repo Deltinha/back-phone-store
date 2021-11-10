@@ -1,8 +1,8 @@
-import './setup';
+import './setup.js';
 import express from 'express';
 import cors from 'cors';
 
-import * as productController from './controllers/product';
+import * as productController from './controllers/product.js';
 
 const app = express();
 app.use(cors());
