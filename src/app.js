@@ -12,6 +12,8 @@ app.get('/product', productController.getAllProducts);
 
 app.get('/product/:id', productController.getProductInfoById);
 
+app.get('/health', (req, res) => res.sendStatus(200));
+
 // eslint-disable-next-line no-unused-vars
 app.use((error, request, response, next) => {
   console.log({ error, request, response });
