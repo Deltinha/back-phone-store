@@ -11,6 +11,7 @@ describe('List products test suit', () => {
     );
   });
   afterAll(async () => {
+    await connection.query('DELETE FROM product_image;');
     await connection.query('DELETE FROM products;');
   });
   it("returns 200 for get on '/product'", async () => {
