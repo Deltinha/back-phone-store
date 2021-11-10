@@ -8,9 +8,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/product', productController.getAllProducts);
+app.get('/products', productController.getAllProducts);
 
-app.get('/product/:id', productController.getProductInfoById);
+app.get('/products/:id', productController.getProductInfoById);
 
 app.get('/health', (req, res) => res.sendStatus(200));
 

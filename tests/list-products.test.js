@@ -14,7 +14,7 @@ describe('List products test suit', () => {
     await connection.query('DELETE FROM products;');
   });
   it("returns 200 for get on '/product'", async () => {
-    const result = await supertest(app).get('/product');
+    const result = await supertest(app).get('/products');
     expect(result.status).toEqual(200);
   });
 });
@@ -28,8 +28,8 @@ describe('Get product by id test suit', () => {
   afterAll(async () => {
     await connection.query('DELETE FROM products;');
   });
-  it("returns 200 for get on '/product/:id'", async () => {
-    const result = await supertest(app).get('/product/1');
+  it("returns 200 for get on '/products/:id'", async () => {
+    const result = await supertest(app).get('/products/1');
     expect(result.status).toEqual(200);
   });
 });
