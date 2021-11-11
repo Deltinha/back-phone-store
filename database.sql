@@ -29,12 +29,11 @@ CREATE TABLE "products" (
 	"description" TEXT,
 	"value" integer NOT NULL,
 	CONSTRAINT "products_pk" PRIMARY KEY ("id")
-
 );
 
 CREATE TABLE "categories" (
 	"id" serial NOT NULL,
-	"name" serial NOT NULL UNIQUE,
+	"name" TEXT NOT NULL UNIQUE,
 	"type" TEXT NOT NULL,
 	CONSTRAINT "categories_pk" PRIMARY KEY ("id")
 
