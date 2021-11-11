@@ -20,16 +20,20 @@ describe('List products test suit', () => {
 });
 
 describe('Get product by id test suit', () => {
+  let id;
   beforeEach(async () => {
-    await connection.query(
-      'INSERT INTO products ("model","brand","color","value","capacity") VALUES (\'One Hyper\', \'Motorola\', \'Blue\', 129900, \'128GB\');',
+    id = await connection.query(
+      `INSERT INTO products 
+      ("model","brand","color","value","capacity") 
+      VALUES ('One Hyper', 'Motorola', 'Blue', 129900, '128GB')
+      RETURNING id;`,
     );
   });
   afterAll(async () => {
     await connection.query('DELETE FROM products;');
   });
   it("returns 200 for get on '/product/:id'", async () => {
-    const result = await supertest(app).get('/product/1');
+    const result = await supertest(app).get(`/product/${id.rows[0].id}`);
     expect(result.status).toEqual(200);
   });
 });
