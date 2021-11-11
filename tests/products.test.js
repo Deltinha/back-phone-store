@@ -11,10 +11,11 @@ describe('List products test suit', () => {
     );
   });
   afterAll(async () => {
+    await connection.query('DELETE FROM product_image;');
     await connection.query('DELETE FROM products;');
   });
   it("returns 200 for get on '/product'", async () => {
-    const result = await supertest(app).get('/product');
+    const result = await supertest(app).get('/products');
     expect(result.status).toEqual(200);
   });
 });

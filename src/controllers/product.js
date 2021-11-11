@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import joi from 'joi';
-import * as productService from '../services/product';
+import * as productService from '../services/product.js';
 
 export async function getProductInfoById(req, res) {
   const { id } = req.params;
