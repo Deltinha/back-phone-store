@@ -23,6 +23,18 @@ export async function getProductCategoriesById(id) {
   return categories.rows;
 }
 
+export async function getProductImagesById(id) {
+  const images = await connection.query(`
+    SELECT product_image.perspective, product_image.url
+    FROM product_image
+    JOIN products
+    ON product_image.product_id=products.id
+    WHERE products.id=$1;
+  `, [id]);
+
+  return images.rows;
+}
+
 export async function getAllProducts() {
   const products = await connection.query(`
   SELECT final_result.*, 

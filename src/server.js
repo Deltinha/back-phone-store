@@ -11,7 +11,7 @@ process.on('uncaughtException', (error) => {
   console.error('Server exiting due to uncaught exception', error);
 });
 
-const port = process.env.NODE_ENV === 'dev' ? 4001 : process.env.PORT;
+const port = process.env.NODE_ENV === 'dev' ? 4000 : process.env.PORT;
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);

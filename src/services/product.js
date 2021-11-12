@@ -4,6 +4,7 @@ import * as productRepository from '../repositories/product.js';
 export async function getProductInfoById(id) {
   const productInfo = await productRepository.getProductInfoById(id);
   let productCategories = await productRepository.getProductCategoriesById(id);
+  const productImages = await productRepository.getProductImagesById(id);
 
   const { description, value } = productInfo[0];
 
@@ -15,6 +16,7 @@ export async function getProductInfoById(id) {
     description,
     value,
     ...productCategories,
+    productImages,
   };
 
   return product;
