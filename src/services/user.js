@@ -6,8 +6,12 @@ function hashPassword(password) {
   return hashedPass;
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export async function createUser(userInfo) {
   const hashedPass = hashPassword(userInfo.password);
   await userRepository.insertUser({ ...userInfo, hashedPass });
+}
+
+export async function checkEmailExists(email) {
+  const emailAlreadyExist = await userRepository.getUserByEmail(email);
+  return (emailAlreadyExist !== 0);
 }

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import connection from '../database/database';
 
 export async function insertUser(userInfo) {
@@ -30,5 +29,12 @@ export async function insertUser(userInfo) {
     hashedPass, cep, state,
     city, neighborhood, street,
     addressNumber, complement, cpf, phoneNumber]);
-  console.log({ userInfo });
+}
+
+export async function getUserByEmail(email) {
+  const user = await connection.query(`
+        SELECT * FROM users
+        WHERE email=$1
+    `, [email]);
+  return user.rows.length;
 }

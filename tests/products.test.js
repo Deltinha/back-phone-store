@@ -22,7 +22,7 @@ describe('List products test suit', () => {
   });
 });
 
-describe('Get product by id', () => {
+describe('GET /products/:id', () => {
   let productId;
   let categoriesIdList;
 
@@ -58,10 +58,11 @@ describe('Get product by id', () => {
   });
 
   afterAll(async () => {
-    await connection.query('DELETE FROM products, categories, product_category;');
+    await connection.query('DELETE FROM product_category;');
+    await connection.query('DELETE FROM products, categories;');
   });
 
-  it("returns 200 for get on '/product/:id'", async () => {
+  it('returns 200 for valid params', async () => {
     const result = await supertest(app).get(`/products/${productId}`);
     expect(result.status).toEqual(200);
   });
