@@ -4,7 +4,7 @@ import supertest from 'supertest';
 import app from '../src/app';
 import connection from '../src/database/database';
 
-describe('POST /user', () => {
+describe('POST /register', () => {
   afterAll(async () => {
     await connection.query('DELETE FROM users;');
   });
@@ -26,7 +26,7 @@ describe('POST /user', () => {
       phoneNumber: '78468152384',
     };
 
-    const result = await supertest(app).post('/user').send(body);
+    const result = await supertest(app).post('/register').send(body);
     expect(result.status).toEqual(201);
   });
 
@@ -47,7 +47,7 @@ describe('POST /user', () => {
       phoneNumber: '78468152384',
     };
 
-    const result = await supertest(app).post('/user').send(body);
+    const result = await supertest(app).post('/register').send(body);
     expect(result.status).toEqual(400);
   });
 
@@ -79,7 +79,7 @@ describe('POST /user', () => {
         VALUES ('user', 'da silva', 'user@gmail.com', '145236', '44380-000', 'BA', 'Cruz das Almas', 'Centro', 'Av. BH', '52', 'ap 24', '78541296583', '789458261432')
     `);
 
-    const result = await supertest(app).post('/user').send(body);
+    const result = await supertest(app).post('/register').send(body);
     expect(result.status).toEqual(403);
   });
 });
