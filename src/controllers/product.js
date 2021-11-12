@@ -9,7 +9,7 @@ export async function getProductInfoById(req, res) {
 
 export async function getAllProducts(req, res) {
   if (Object.keys(req.query).length > 0) {
-    const productsData = await productService.getProductsFromCategorie(req.query);
+    const productsData = await productService.getProductsFromCategory(req.query);
     return res.send(productsData).status(200);
   }
 

@@ -69,7 +69,7 @@ export async function getAllCategories() {
   return categories.rows;
 }
 
-export async function getProductsFromCategorie({ categorie, value }) {
+export async function getProductsFromCategorie({ category, value }) {
   const products = await connection.query(`
   SELECT 
     final_result.*,
@@ -100,7 +100,7 @@ export async function getProductsFromCategorie({ categorie, value }) {
     ON final_result.id=products.id
   WHERE
     product_image.perspective='front' AND
-    ${categorie} LIKE '%${value}';
+    ${category} LIKE '%${value}';
   `);
   return products.rows;
 }

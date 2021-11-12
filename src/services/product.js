@@ -31,9 +31,9 @@ export async function getAllCategories() {
   return categoriesData;
 }
 
-export async function getProductsFromCategorie(query) {
-  const categorie = Object.keys(query)[0];
+export async function getProductsFromCategory(query) {
+  const category = Object.keys(query)[0];
   const value = Object.values(query)[0];
-  const productsData = await productRepository.getProductsFromCategorie({ categorie, value });
+  const productsData = await productRepository.getProductsFromCategorie({ category, value });
   return productsData;
 }
