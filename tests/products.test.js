@@ -2,7 +2,7 @@
 import '../src/setup';
 import supertest from 'supertest';
 import app from '../src/app';
-import connection from '../database/database';
+import connection from '../src/database/database';
 
 describe('List products test suit', () => {
   beforeEach(async () => {
