@@ -15,3 +15,10 @@ export async function getAllCategories() {
   const categoriesData = await productRepository.getAllCategories();
   return categoriesData;
 }
+
+export async function getProductsFromCategorie(query) {
+  const categorie = Object.keys(query)[0];
+  const value = Object.values(query)[0];
+  const productsData = await productRepository.getProductsFromCategorie({ categorie, value });
+  return productsData;
+}
