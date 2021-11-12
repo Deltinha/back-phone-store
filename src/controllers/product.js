@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import * as productService from '../services/product.js';
 
 export async function getProductInfoById(req, res) {

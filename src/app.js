@@ -2,7 +2,8 @@ import './setup.js';
 import express from 'express';
 import cors from 'cors';
 
-import * as productController from './controllers/product.js';
+import * as productController from './controllers/product';
+import * as userController from './controllers/user';
 
 const app = express();
 app.use(cors());
@@ -14,9 +15,7 @@ app.get('/products/:id', productController.getProductInfoById);
 
 app.get('/categories', productController.getAllCategories);
 
-app.post('/user', () => {
-  // to-do
-});
+app.post('/user', userController.postNewUser);
 
 app.get('/health', (req, res) => res.sendStatus(200));
 
