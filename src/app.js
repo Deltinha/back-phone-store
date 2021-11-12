@@ -14,6 +14,10 @@ app.get('/products/:id', productController.getProductInfoById);
 
 app.get('/categories', productController.getAllCategories);
 
+app.post('/user', () => {
+  // to-do
+});
+
 app.get('/health', (req, res) => res.sendStatus(200));
 
 // eslint-disable-next-line no-unused-vars
