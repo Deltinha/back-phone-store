@@ -18,6 +18,5 @@ export default function validalidateUserInfo(obj) {
   });
 
   const validation = schema.validate(obj);
-  console.log(validation.error);
   return validation.error;
 }
