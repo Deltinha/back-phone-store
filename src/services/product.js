@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import joi from 'joi';
 import * as productRepository from '../repositories/product.js';
 
 export async function getProductInfoById(id) {
@@ -10,4 +9,9 @@ export async function getProductInfoById(id) {
 export async function getAllProducts() {
   const productsData = await productRepository.getAllProducts();
   return productsData;
+}
+
+export async function getAllCategories() {
+  const categoriesData = await productRepository.getAllCategories();
+  return categoriesData;
 }

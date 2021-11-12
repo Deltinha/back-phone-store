@@ -25,3 +25,7 @@ describe('Categories test suit', () => {
     expect(result.status).toEqual(200);
   });
 });
+
+afterAll(() => {
+  connection.end();
+});

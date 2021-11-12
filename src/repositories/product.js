@@ -17,3 +17,16 @@ export async function getAllProducts() {
   `);
   return products.rows;
 }
+
+export async function getAllCategories() {
+  const categories = await connection.query(`
+    SELECT 
+      categories.type AS "type",
+      array_agg(categories.name) AS "names"
+    FROM 
+      categories
+    GROUP BY 
+      categories.type;
+  `);
+  return categories.rows;
+}

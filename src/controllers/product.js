@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import joi from 'joi';
 import * as productService from '../services/product.js';
 
 export async function getProductInfoById(req, res) {
@@ -11,4 +10,9 @@ export async function getProductInfoById(req, res) {
 export async function getAllProducts(req, res) {
   const productsData = await productService.getAllProducts();
   res.send(productsData).status(200);
+}
+
+export async function getAllCategories(req, res) {
+  const categoriesData = await productService.getAllCategories();
+  res.send(categoriesData).status(200);
 }
