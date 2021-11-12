@@ -22,7 +22,7 @@ export async function getProductInfoById(id) {
 }
 
 export async function getAllProducts() {
-  const productsData = await productRepository.getAllProducts();
+  const productsData = await productRepository.getAllProducts({ category: '', value: '' });
   return productsData;
 }
 
@@ -31,9 +31,16 @@ export async function getAllCategories() {
   return categoriesData;
 }
 
+export function categoryIsKnown(category) {
+  if (category === 'brand' || category === 'color' || category === 'model' || category === 'capacity') {
+    return true;
+  }
+  return false;
+}
+
 export async function getProductsFromCategory(query) {
   const category = Object.keys(query)[0];
   const value = Object.values(query)[0];
-  const productsData = await productRepository.getProductsFromCategorie({ category, value });
+  const productsData = await productRepository.getAllProducts({ category, value });
   return productsData;
 }
