@@ -22,7 +22,7 @@ describe('List products test suit', () => {
   });
 });
 
-describe('Get product by id test suit', () => {
+describe('Get product by id', () => {
   let productId;
   let categoriesIdList;
 
