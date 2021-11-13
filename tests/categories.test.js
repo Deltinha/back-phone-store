@@ -62,22 +62,28 @@ beforeEach(async () => {
   );
 });
 
-describe('GET /products', () => {
-  it('returns 200 for get on /products', async () => {
-    const products = await supertest(app).get('/products');
+describe('Categories test suit', () => {
+  it('returns 200 for get on /categories', async () => {
+    const categories = await supertest(app).get('/categories');
+    expect(categories.status).toEqual(200);
+  });
+
+  it('returns only products from selected category', async () => {
+    const products = await supertest(app).get('/products?brand=Samsung');
     expect(products.status).toEqual(200);
+    expect(products.body.length).toEqual(1);
+    expect(products.body[0].brand).toEqual('Samsung');
   });
 
-  it('returns all products when requesting /products', async () => {
-    const products = await supertest(app).get('/products');
-    expect(products.body.length).toEqual(2);
+  it('returns empty array when no products on requested category', async () => {
+    const products = await supertest(app).get('/products?brand=Asus');
+    expect(products.status).toEqual(200);
+    expect(products.body.length).toEqual(0);
   });
-});
 
-describe('GET /products/:id', () => {
-  it('returns 200 for valid params', async () => {
-    const result = await supertest(app).get(`/products/${productId.rows[0].id}`);
-    expect(result.status).toEqual(200);
+  it('returns 400 for search on invalid category', async () => {
+    const products = await supertest(app).get('/products?size=gigaBig');
+    expect(products.status).toEqual(400);
   });
 });
 
