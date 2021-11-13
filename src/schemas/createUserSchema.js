@@ -6,7 +6,7 @@ export default function validalidateUserInfo(obj) {
     lastName: Joi.string().min(3).required(),
     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: false } }).required(),
     password: Joi.string().min(6).max(15).required(),
-    cep: Joi.string().required().length(9),
+    cep: Joi.string().required().length(8),
     state: Joi.string().required(),
     city: Joi.string().required(),
     neighborhood: Joi.string().required(),
