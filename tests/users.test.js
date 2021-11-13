@@ -15,7 +15,7 @@ describe('POST /user', () => {
       lastName: 'da silva',
       email: 'user@gmail.com',
       password: '145236',
-      cep: '44380-000',
+      cep: '44380000',
       state: 'BA',
       city: 'Cruz das Almas',
       neighborhood: 'Centro',
@@ -57,7 +57,7 @@ describe('POST /user', () => {
       lastName: 'da silva',
       email: 'user@gmail.com',
       password: '145236',
-      cep: '44380-000',
+      cep: '44380000',
       state: 'BA',
       city: 'Cruz das Almas',
       neighborhood: 'Centro',
@@ -76,7 +76,7 @@ describe('POST /user', () => {
             city, neighborhood, street, 
             address_number, complement, cpf, phone_number
             )
-        VALUES ('user', 'da silva', 'user@gmail.com', '145236', '44380-000', 'BA', 'Cruz das Almas', 'Centro', 'Av. BH', '52', 'ap 24', '78541296583', '789458261432')
+        VALUES ('user', 'da silva', 'user@gmail.com', '145236', '44380000', 'BA', 'Cruz das Almas', 'Centro', 'Av. BH', '52', 'ap 24', '78541296583', '789458261432')
     `);
 
     const result = await supertest(app).post('/user').send(body);
