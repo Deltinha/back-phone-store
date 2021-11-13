@@ -35,8 +35,9 @@ export async function getProductImagesById(id) {
   return images.rows;
 }
 
-export async function getAllProducts() {
-  const products = await connection.query(`
+export async function getAllProducts({ category, value }) {
+  const params = [];
+  let query = `
   SELECT final_result.*, 
   product_image.url, products.value FROM crosstab(
     'SELECT product_category.product_id, categories.type, categories.name 
@@ -51,7 +52,25 @@ export async function getAllProducts() {
   ON final_result.id=product_image.product_id 
   JOIN products 
   ON final_result.id=products.id 
-  WHERE product_image.perspective='front';
-  `);
+  WHERE product_image.perspective='front'
+  `;
+  if (category) {
+    query += `AND (${category}) LIKE ('%' || $1);`;
+    params.push(value);
+  }
+  const products = await connection.query(`${query};`, params);
   return products.rows;
+}
+
+export async function getAllCategories() {
+  const categories = await connection.query(`
+    SELECT 
+      categories.type AS "type",
+      array_agg(categories.name) AS "names"
+    FROM 
+      categories
+    GROUP BY 
+      categories.type;
+  `);
+  return categories.rows;
 }

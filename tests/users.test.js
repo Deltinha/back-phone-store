@@ -77,7 +77,7 @@ describe('POST /register', () => {
             city, neighborhood, street, 
             address_number, complement, cpf, phone_number
             )
-        VALUES ('user', 'da silva', 'user@gmail.com', '145236', '44380-000', 'BA', 'Cruz das Almas', 'Centro', 'Av. BH', '52', 'ap 24', '78541296583', '789458261432')
+        VALUES ('user', 'da silva', 'user@gmail.com', '145236', '44380000', 'BA', 'Cruz das Almas', 'Centro', 'Av. BH', '52', 'ap 24', '78541296583', '789458261432')
     `);
 
     const result = await supertest(app).post('/register').send(body);

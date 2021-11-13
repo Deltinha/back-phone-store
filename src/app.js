@@ -17,6 +17,8 @@ app.post('/register', userController.postNewUser);
 
 app.post('/login', userController.login);
 
+app.get('/categories', productController.getAllCategories);
+
 app.get('/health', (req, res) => res.sendStatus(200));
 
 // eslint-disable-next-line no-unused-vars
