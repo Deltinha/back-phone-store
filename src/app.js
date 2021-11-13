@@ -15,7 +15,7 @@ app.get('/products/:id', productController.getProductInfoById);
 
 app.post('/register', userController.postNewUser);
 
-app.post('/login', userController.postNewUser);
+app.post('/login', userController.login);
 
 app.get('/health', (req, res) => res.sendStatus(200));
 

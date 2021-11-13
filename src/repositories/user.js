@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import connection from '../database/database';
 
 export async function insertUser(userInfo) {
@@ -36,5 +37,14 @@ export async function getUserByEmail(email) {
         SELECT * FROM users
         WHERE email=$1
     `, [email]);
-  return user.rows.length;
+  return user.rows;
+}
+
+export async function createSession(session) {
+  const { user_id, token } = session;
+  await connection.query(`
+    INSERT INTO sessions
+    (user_id, token)
+    VALUES ($1, $2)
+  `, [user_id, token]);
 }
