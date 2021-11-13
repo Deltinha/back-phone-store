@@ -13,9 +13,11 @@ app.get('/products', productController.getAllProducts);
 
 app.get('/products/:id', productController.getProductInfoById);
 
-app.get('/categories', productController.getAllCategories);
+app.post('/register', userController.postNewUser);
 
-app.post('/user', userController.postNewUser);
+app.post('/login', userController.login);
+
+app.get('/categories', productController.getAllCategories);
 
 app.get('/health', (req, res) => res.sendStatus(200));
 

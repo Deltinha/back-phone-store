@@ -12,7 +12,6 @@ export default function validalidateUserInfo(obj) {
     neighborhood: Joi.string().required(),
     street: Joi.string().required(),
     addressNumber: Joi.string().required(),
-    complement: Joi.string(),
     cpf: Joi.string().required().length(11),
     phoneNumber: Joi.string().required().min(8).max(15),
   });
