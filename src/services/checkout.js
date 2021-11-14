@@ -36,12 +36,12 @@ export async function insertPurcharse({ cart, userId }) {
     }
   }));
 
-  productsRef.forEach((product) => {
-    value += product.value;
-  });
-
   cart.forEach((item, index) => {
     Object.assign(item, productsRef[index]);
+  });
+
+  cart.forEach((item) => {
+    value += item.value * item.qty;
   });
 
   const purchases = await checkoutRepository.insertPurcharse({ cart, userId, value });
