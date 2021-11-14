@@ -24,5 +24,4 @@ export async function insertPurcharse({ cart, userId, value }) {
        ($1, ${purchaseId}, $2, ${value});
     `, [item.productId, item.qty]);
   }
-  return cart;
 }
