@@ -115,43 +115,43 @@ describe('Checkout test suit', () => {
 
     expect(result.status).toEqual(400);
   });
-});
 
-it('returns 400 for invalid params', async () => {
-  const firstBody = [
-    {
-      qty: 1,
-    },
-  ];
-  const secondBody = [
-    {
-      productId: 1337,
-    },
-  ];
+  it('returns 400 for invalid params', async () => {
+    const firstBody = [
+      {
+        qty: 1,
+      },
+    ];
+    const secondBody = [
+      {
+        productId: 1337,
+      },
+    ];
 
-  let result = await supertest(app).post('/checkout').send(firstBody).set('Authorization', `Bearer ${token}`);
-  expect(result.status).toEqual(400);
+    let result = await supertest(app).post('/checkout').send(firstBody).set('Authorization', `Bearer ${token}`);
+    expect(result.status).toEqual(400);
 
-  result = await supertest(app).post('/checkout').send(secondBody).set('Authorization', `Bearer ${token}`);
-  expect(result.status).toEqual(400);
-});
+    result = await supertest(app).post('/checkout').send(secondBody).set('Authorization', `Bearer ${token}`);
+    expect(result.status).toEqual(400);
+  });
 
-it('returns 401 for invalid headers', async () => {
-  const body = [
-    {
-      productId: productId.rows[0].id,
-      qty: 1,
-    },
-  ];
+  it('returns 401 for invalid headers', async () => {
+    const body = [
+      {
+        productId: productId.rows[0].id,
+        qty: 1,
+      },
+    ];
 
-  let result = await supertest(app).post('/checkout').send(body).set('Authorization', `${token}`);
-  expect(result.status).toEqual(401);
+    let result = await supertest(app).post('/checkout').send(body).set('Authorization', `${token}`);
+    expect(result.status).toEqual(401);
 
-  result = await supertest(app).post('/checkout').send(body).set('Authorization', `Super ${token}`);
-  expect(result.status).toEqual(401);
+    result = await supertest(app).post('/checkout').send(body).set('Authorization', `Super ${token}`);
+    expect(result.status).toEqual(401);
 
-  result = await supertest(app).post('/checkout').send(body).set('Authorization', `${uuid()}`);
-  expect(result.status).toEqual(401);
+    result = await supertest(app).post('/checkout').send(body).set('Authorization', `${uuid()}`);
+    expect(result.status).toEqual(401);
+  });
 });
 
 afterEach(async () => {
