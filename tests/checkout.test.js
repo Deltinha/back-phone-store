@@ -33,12 +33,7 @@ beforeAll(async () => {
       ('Galaxy Fold', 'model'),
       ('Samsung', 'brand'),
       ('#000000', 'color'),
-      ('512GB', 'capacity'),
-      ('#FFFFFF', 'color'),
-      ('iPhone', 'brand'),
-      ('Lenovo', 'brand'),
-      ('8', 'model'),
-      ('256GB', 'capacity')
+      ('512GB', 'capacity')
       RETURNING id;`,
   );
 
@@ -93,28 +88,77 @@ beforeAll(async () => {
 });
 
 describe('Checkout test suit', () => {
-  it('returns checkout', async () => {
-    const body = {
-      userId: userId.rows[0].id,
-      products: [
-        {
-          productId: productId.rows[0].id,
-          qty: 1,
-        },
-        {
-          productId: productId.rows[1].id,
-          qty: 2,
-        },
-      ],
-    };
+  it('returns 201 for valid params', async () => {
+    const body = [
+      {
+        productId: productId.rows[0].id,
+        qty: 1,
+      },
+      {
+        productId: productId.rows[1].id,
+        qty: 2,
+      },
+    ];
     const result = await supertest(app).post('/checkout').send(body).set('Authorization', `Bearer ${token}`);
+
     expect(result.status).toEqual(200);
   });
+
+  it('returns 400 for invalid product', async () => {
+    const body = [
+      {
+        productId: 1337,
+        qty: 1,
+      },
+    ];
+    const result = await supertest(app).post('/checkout').send(body).set('Authorization', `Bearer ${token}`);
+
+    expect(result.status).toEqual(400);
+  });
+});
+
+it('returns 400 for invalid params', async () => {
+  const firstBody = [
+    {
+      qty: 1,
+    },
+  ];
+  const secondBody = [
+    {
+      productId: 1337,
+    },
+  ];
+
+  let result = await supertest(app).post('/checkout').send(firstBody).set('Authorization', `Bearer ${token}`);
+  expect(result.status).toEqual(400);
+
+  result = await supertest(app).post('/checkout').send(secondBody).set('Authorization', `Bearer ${token}`);
+  expect(result.status).toEqual(400);
+});
+
+it('returns 401 for invalid headers', async () => {
+  const body = [
+    {
+      productId: productId.rows[0].id,
+      qty: 1,
+    },
+  ];
+
+  let result = await supertest(app).post('/checkout').send(body).set('Authorization', `${token}`);
+  expect(result.status).toEqual(401);
+
+  result = await supertest(app).post('/checkout').send(body).set('Authorization', `Super ${token}`);
+  expect(result.status).toEqual(401);
+
+  result = await supertest(app).post('/checkout').send(body).set('Authorization', `${uuid()}`);
+  expect(result.status).toEqual(401);
 });
 
 afterEach(async () => {
   await connection.query('DELETE FROM product_category;');
   await connection.query('DELETE FROM product_image;');
+  await connection.query('DELETE FROM product_purchase;');
+  await connection.query('DELETE FROM purchases;');
   await connection.query('DELETE FROM products;');
   await connection.query('DELETE FROM categories;');
   await connection.query('DELETE FROM sessions;');

@@ -21,5 +21,5 @@ export async function postCheckout(req, res) {
 
   const purchases = await checkoutService.insertPurcharse({ cart, userId });
 
-  return res.send(purchases).status(200);
+  return res.send(purchases).status(201);
 }
