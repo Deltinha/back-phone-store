@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import validadeCheckout from '../schemas/checkoutSchema';
+import validadeCheckoutSyntax from '../schemas/checkoutSchema';
 import validateBearerToken from '../schemas/authorizationSchema';
 import * as checkoutRepository from '../repositories/checkout';
 import * as productRepository from '../repositories/product';
