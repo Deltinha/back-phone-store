@@ -5,7 +5,7 @@ import * as checkoutRepository from '../repositories/checkout';
 import * as productRepository from '../repositories/product';
 
 export async function checkIsCartValid(cart) {
-  const isSyntaxValid = validadeCheckout(cart);
+  const isSyntaxValid = validadeCheckoutSyntax(cart);
   let allProductsExist = true;
 
   await Promise.all(cart.map(async (item) => {
