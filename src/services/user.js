@@ -55,5 +55,5 @@ export async function login(loginInfo) {
 export async function checkUserLoggedIn(token) {
   const user = await userRepository.getSession(token);
   if (user.length === 0) return false;
-  return true;
+  return user[0];
 }

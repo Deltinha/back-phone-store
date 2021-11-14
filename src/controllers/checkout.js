@@ -17,5 +17,9 @@ export async function postCheckout(req, res) {
   const isUserLoggedIn = await userService.checkUserLoggedIn(token);
   if (!isUserLoggedIn) return res.sendStatus(402);
 
-  return res.send(cart).status(200);
+  const userId = isUserLoggedIn.user_id;
+
+  const purchases = await checkoutService.insertPurcharse({ cart, userId });
+
+  return res.send(purchases).status(200);
 }
