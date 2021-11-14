@@ -12,3 +12,11 @@ export async function checkIsAuthValid(bearerToken) {
   const isAuthValid = validateBearerToken(bearerToken);
   return isAuthValid;
 }
+
+export async function insertPurcharse(cart) {
+  const {
+    userId,
+    products,
+  } = cart;
+  return true;
+}

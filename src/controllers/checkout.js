@@ -17,5 +17,5 @@ export async function postCheckout(req, res) {
   const isUserLoggedIn = await userService.checkUserLoggedIn(token);
   if (!isUserLoggedIn) return res.sendStatus(402);
 
-  return res.send(req.headers).status(200);
+  return res.send(cart).status(200);
 }
