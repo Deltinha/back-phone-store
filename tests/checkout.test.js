@@ -99,9 +99,9 @@ describe('Checkout test suit', () => {
         qty: 2,
       },
     ];
-    const result = await supertest(app).post('/checkout').send(body).set('Authorization', `Bearer ${token}`);
 
-    expect(result.status).toEqual(200);
+    const result = await supertest(app).post('/checkout').send(body).set('Authorization', `Bearer ${token}`);
+    expect(result.status).toEqual(201);
   });
 
   it('returns 400 for invalid product', async () => {
@@ -111,8 +111,8 @@ describe('Checkout test suit', () => {
         qty: 1,
       },
     ];
-    const result = await supertest(app).post('/checkout').send(body).set('Authorization', `Bearer ${token}`);
 
+    const result = await supertest(app).post('/checkout').send(body).set('Authorization', `Bearer ${token}`);
     expect(result.status).toEqual(400);
   });
 
@@ -143,7 +143,10 @@ describe('Checkout test suit', () => {
       },
     ];
 
-    let result = await supertest(app).post('/checkout').send(body).set('Authorization', `${token}`);
+    let result = await supertest(app).post('/checkout').send(body).set('Authorization', `Bearer token123`);
+    expect(result.status).toEqual(401);
+
+    result = await supertest(app).post('/checkout').send(body).set('Authorization', `${token}`);
     expect(result.status).toEqual(401);
 
     result = await supertest(app).post('/checkout').send(body).set('Authorization', `Super ${token}`);
@@ -152,9 +155,25 @@ describe('Checkout test suit', () => {
     result = await supertest(app).post('/checkout').send(body).set('Authorization', `${uuid()}`);
     expect(result.status).toEqual(401);
   });
+
+  it('returns 401 fpr user not logged in', async () => {
+    const body = [
+      {
+        productId: productId.rows[0].id,
+        qty: 1,
+      },
+      {
+        productId: productId.rows[1].id,
+        qty: 2,
+      },
+    ];
+
+    const result = await supertest(app).post('/checkout').send(body).set('Authorization', `Bearer ${uuid()}`);
+    expect(result.status).toEqual(401);
+  });
 });
 
-afterEach(async () => {
+afterAll(async () => {
   await connection.query('DELETE FROM product_category;');
   await connection.query('DELETE FROM product_image;');
   await connection.query('DELETE FROM product_purchase;');
@@ -163,8 +182,5 @@ afterEach(async () => {
   await connection.query('DELETE FROM categories;');
   await connection.query('DELETE FROM sessions;');
   await connection.query('DELETE FROM users;');
-});
-
-afterAll(() => {
   connection.end();
 });
