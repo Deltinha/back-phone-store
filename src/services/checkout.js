@@ -12,7 +12,6 @@ export async function checkIsCartValid(cart) {
   });
 
   const productsRef = await productRepository.getProductsByMultipleIds(idArray);
-  console.log(productsRef);
 
   if (!isSyntaxValid || productsRef.length !== cart.length) return false;
 
