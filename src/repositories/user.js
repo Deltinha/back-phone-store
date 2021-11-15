@@ -48,3 +48,15 @@ export async function createSession(session) {
     VALUES ($1, $2)
   `, [user_id, token]);
 }
+
+export async function getSession(token) {
+  const session = await connection.query(`
+    SELECT 
+      * 
+    FROM
+      sessions
+    WHERE
+     token = $1;
+  `, [token]);
+  return session.rows;
+}

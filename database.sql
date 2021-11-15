@@ -50,7 +50,7 @@ CREATE TABLE "product_category" (
 CREATE TABLE "purchases" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
-	"date" timestamp with time zone NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT 'now()',
 	"value" integer NOT NULL,
 	CONSTRAINT "purchases_pk" PRIMARY KEY ("id")
 

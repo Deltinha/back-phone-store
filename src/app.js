@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import * as productController from './controllers/product';
 import * as userController from './controllers/user';
+import * as checkoutController from './controllers/checkout';
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,8 @@ app.post('/register', userController.postNewUser);
 app.post('/login', userController.login);
 
 app.get('/categories', productController.getAllCategories);
+
+app.post('/checkout', checkoutController.postCheckout);
 
 app.get('/health', (req, res) => res.sendStatus(200));
 

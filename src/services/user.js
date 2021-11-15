@@ -51,3 +51,9 @@ export async function login(loginInfo) {
   await userRepository.createSession(body);
   return body;
 }
+
+export async function checkUserLoggedIn(token) {
+  const session = await userRepository.getSession(token);
+  if (session.length === 0) return false;
+  return session[0];
+}
