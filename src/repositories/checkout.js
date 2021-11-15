@@ -5,6 +5,12 @@ import connection from '../database/database';
 
 export async function insertPurcharse({ cart, userId, value }) {
   let purchaseId = 0;
+  let insertQuery = `
+    INSERT INTO product_purchase
+     (product_id, purchase_id, quantity, value)
+    VALUES
+  `;
+
   const purchase = await connection.query(`
     INSERT INTO purchases
       (user_id, value)
@@ -16,12 +22,16 @@ export async function insertPurcharse({ cart, userId, value }) {
 
   purchaseId = purchase.rows[0].id;
 
-  for (const item of cart) {
-    await connection.query(`
-      INSERT INTO product_purchase
-       (product_id, purchase_id, quantity, value)
-      VALUES
-       ($1, ${purchaseId}, $2, ${value});
-    `, [item.productId, item.qty]);
-  }
+  cart.forEach((item) => {
+    insertQuery += `(
+      ${item.productId},
+      ${purchaseId},
+      ${item.qty},
+      ${item.value}
+    ),`;
+  });
+
+  insertQuery = insertQuery.slice(0, -1);
+
+  await connection.query(insertQuery);
 }
