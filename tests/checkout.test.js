@@ -124,7 +124,7 @@ describe('Checkout test suit', () => {
     ];
     const secondBody = [
       {
-        productId: 1337,
+        productId: productId.rows[0].id,
       },
     ];
 

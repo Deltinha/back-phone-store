@@ -6,6 +6,8 @@ import * as productRepository from '../repositories/product';
 
 export async function checkIsCartValid(cart) {
   const isSyntaxValid = validadeCheckoutSyntax(cart);
+  if (!isSyntaxValid) return false;
+
   const idArray = [];
   cart.forEach((product) => {
     idArray.push(product.productId);
@@ -13,7 +15,7 @@ export async function checkIsCartValid(cart) {
 
   const productsRef = await productRepository.getProductsByMultipleIds(idArray);
 
-  if (!isSyntaxValid || productsRef.length !== cart.length) return false;
+  if (productsRef.length !== cart.length) return false;
 
   cart.forEach((item, index) => {
     Object.assign(item, productsRef[index]);
