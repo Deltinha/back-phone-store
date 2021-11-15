@@ -9,6 +9,21 @@ export async function getProductInfoById(id) {
   return product.rows;
 }
 
+export async function getProductsByMultipleIds(idArray) {
+  let searchQuery = `
+  SELECT * FROM products
+    WHERE
+  `;
+
+  idArray.forEach((productId) => {
+    searchQuery += ` id=${productId} OR`;
+  });
+
+  searchQuery = searchQuery.slice(0, -2);
+  const products = await connection.query(searchQuery);
+  return products.rows;
+}
+
 export async function getProductCategoriesById(id) {
   const categories = await connection.query(`
     SELECT categories.name, categories.type
