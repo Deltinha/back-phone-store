@@ -80,7 +80,7 @@ export async function getAllProducts({ category, value }) {
 export async function getAllCategories() {
   const categories = await connection.query(`
     SELECT 
-      categories.type AS "type",
+      INITCAP(categories.type) AS "type",
       array_agg(categories.name) AS "names"
     FROM 
       categories
