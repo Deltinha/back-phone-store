@@ -6,6 +6,9 @@
 
 This is the back-end repository of PhoneStore, an e-commerce for mobile phones.
 
+Check out the front end repository at 
+[https://github.com/rabbithay/phone-store](https://github.com/rabbithay/phone-store)
+
 </br>
 
 ## How to run 🏃‍♀️💨
